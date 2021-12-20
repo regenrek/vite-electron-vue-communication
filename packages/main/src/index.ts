@@ -1,7 +1,73 @@
-import {app, BrowserWindow} from 'electron';
+import type { MenuItemConstructorOptions } from 'electron';
+import {app, BrowserWindow, shell, ipcMain, Menu } from 'electron';
 import {join} from 'path';
 import {URL} from 'url';
 import './security-restrictions';
+// import context from './titlebarContextApi';
+// import titlebarContext from './titlebarContextApi'
+
+const registerTitlebarIpc = () => {
+  ipcMain.handle('open-url', (e, url) => {
+    shell.openExternal(url);
+  });
+};
+
+// const openUrl = () => {
+//   titlebarContext.openModal("https://www.google.at")
+// }
+
+const isMac = process.platform === 'darwin';
+
+
+const template: MenuItemConstructorOptions[] = [
+  ...(isMac
+    ? [
+      {
+        label: app.name,
+        submenu: [
+          { role: 'about', label: 'Über Tipico Multicast Server' },
+          { label: `Version ${app.getVersion()}`, enabled: false },
+          {
+            label: 'Nach Updates suchen',
+            enabled: true,
+            click: () => function () {
+              return false;
+            },
+          },
+          { type: 'separator' },
+          { role: 'quit', label: 'Tipico Multicast Client beenden' },
+        ],
+      } as MenuItemConstructorOptions,
+    ]
+    : []),
+  {
+    label: 'Ansicht',
+    submenu: [
+      { role: 'reload', label: 'Neu laden' },
+      { role: 'forceReload', label: 'Neu laden erzwingen' },
+      { type: 'separator' },
+      { role: 'togglefullscreen', label: 'Vollbild umschalten' },
+    ],
+  } as MenuItemConstructorOptions,
+  ...(!isMac
+    ? [
+      {
+        label: 'Hilfe',
+        submenu: [
+          { role: 'about', label: 'Über Tipico Multicast Server' },
+          { label: `Version ${app.getVersion()}`, enabled: false },
+          {
+            label: 'Nach Updates suchen',
+            enabled: true,
+            click: () => openUrl(),
+          },
+        ],
+      } as MenuItemConstructorOptions,
+    ]
+    : []),
+];
+
+Menu.setApplicationMenu(Menu.buildFromTemplate(template));
 
 const isSingleInstance = app.requestSingleInstanceLock();
 const isDevelopment = import.meta.env.MODE === 'development';
@@ -36,6 +102,8 @@ const createWindow = async () => {
       preload: join(__dirname, '../../preload/dist/index.cjs'),
     },
   });
+
+  registerTitlebarIpc(mainWindow);
 
   /**
    * If you install `show: true` then it can cause issues when trying to close the window.

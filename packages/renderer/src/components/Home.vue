@@ -9,6 +9,12 @@
     >vite-electron-builder documentation</a>.
   </p>
 
+  <div v-if="!openModal">
+    HI FROM MODAL {{ openModal }} 
+  </div>
+
+  ssss
+
   <p>
     <a
       href="https://vitejs.dev/guide/features.html"
@@ -55,6 +61,7 @@
 
 <script lang="ts">
 import {computed, defineComponent, ref} from 'vue';
+import context from '../../../main/src/titlebarContextApi';
 
 export default defineComponent({
   name: 'HelloWorld',
@@ -64,7 +71,14 @@ export default defineComponent({
     const rawString = ref('Hello World');
     const hashedString = computed(() => window.nodeCrypto.sha256sum(rawString.value));
 
-    return {count, rawString, hashedString};
+    //const c:any = context;
+
+    const openModal = computed(() => context.onOpenModal());
+
+
+    //c.open_url("https://www.macherjek.at")
+
+    return {count, rawString, hashedString, openModal};
   },
 });
 </script>
