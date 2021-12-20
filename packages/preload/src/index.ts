@@ -2,7 +2,7 @@ import {contextBridge} from 'electron';
 
 import type {BinaryLike} from 'crypto';
 import {createHash} from 'crypto';
-import titlebarContext from '../../main/src/titlebarContext';
+// import titlebarContext from '../../main/src/titlebarContext';
 /**
  * The "Main World" is the JavaScript context that your main renderer code runs in.
  * By default, the page you load in your renderer executes code in this world.
@@ -39,6 +39,6 @@ contextBridge.exposeInMainWorld('nodeCrypto', {
   },
 });
 
-contextBridge.exposeInMainWorld('electron_window', {
-  titlebar: titlebarContext,
-});
+// contextBridge.exposeInMainWorld('electron_window', {
+//   titlebar: titlebarContext,
+// });
