@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const {createServer, build, createLogger} = require('vite');
 const electronPath = require('electron');
 const {spawn} = require('child_process');
