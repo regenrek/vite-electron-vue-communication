@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const {build} = require('vite');
 const {dirname} = require('path');
 
