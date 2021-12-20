@@ -1,16 +1,16 @@
 import type { MenuItemConstructorOptions } from 'electron';
-import {app, BrowserWindow, shell, ipcMain, Menu } from 'electron';
+import {app, BrowserWindow, Menu } from 'electron';
 import {join} from 'path';
 import {URL} from 'url';
 import './security-restrictions';
 // import context from './titlebarContextApi';
 // import titlebarContext from './titlebarContextApi'
 
-const registerTitlebarIpc = () => {
-  ipcMain.handle('open-url', (e, url) => {
-    shell.openExternal(url);
-  });
-};
+// const registerTitlebarIpc = () => {
+//   ipcMain.handle('open-url', (e, url) => {
+//     shell.openExternal(url);
+//   });
+// };
 
 // const openUrl = () => {
 //   titlebarContext.openModal("https://www.google.at")
@@ -59,7 +59,9 @@ const template: MenuItemConstructorOptions[] = [
           {
             label: 'Nach Updates suchen',
             enabled: true,
-            click: () => openUrl(),
+            click: () => function () {
+              return false;
+            },
           },
         ],
       } as MenuItemConstructorOptions,
@@ -103,7 +105,7 @@ const createWindow = async () => {
     },
   });
 
-  registerTitlebarIpc(mainWindow);
+  // registerTitlebarIpc(mainWindow);
 
   /**
    * If you install `show: true` then it can cause issues when trying to close the window.
