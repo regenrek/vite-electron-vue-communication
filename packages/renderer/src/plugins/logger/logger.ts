@@ -46,7 +46,7 @@ class Logger {
         }
         
         // eslint-disable-next-line no-console
-        if (this.isEnabled) window.console[level](message) as any;
+        if (this.isEnabled) console[level](message) as any;
     }
 }
 
