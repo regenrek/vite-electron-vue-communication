@@ -1,5 +1,5 @@
+import type { IRootState } from 'types/vuex-shim';
 import { createStore } from 'vuex';
-import type { IRootState } from '../../../../types/vuex-shim';
 
 export default createStore<IRootState>({
     state: {
