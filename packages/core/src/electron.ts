@@ -33,6 +33,10 @@ export class Electron implements IEnvironment {
 
     public readonly savingEnabled: boolean = true;
 
+    public init() {
+        return 'init';
+    }
+
     public async saveSettings(settings: Settings): Promise<void> {
         await this.electron.ipcRenderer.sendConvo(
             'config.set',

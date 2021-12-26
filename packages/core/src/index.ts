@@ -9,6 +9,7 @@ export interface IEnvironment {
     connectToStore(
         store: Store<DeepReadonly<IRootState>>
     ): void;
+    init(): void
 }
 
 export function isElectron() {
