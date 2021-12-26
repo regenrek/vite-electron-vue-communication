@@ -1,7 +1,7 @@
 import {app, ipcMain, nativeTheme} from 'electron';
 import path from 'path';
 import fs from 'fs/promises';
-import {IpcChannels} from '/@shared/ipcChannels';
+import {IpcChannels} from '/@shared/IpcChannels';
 
 const FLAG_FILE_PATH = path.join(app.getPath('userData'), 'COLOR_SCHEME');
 

@@ -5,8 +5,12 @@
     "paths": {
       "/@/*": [
         "./src/*"
+      ],
+      "/@shared/*": [
+        "../shared/*"
       ]
     },
+    "allowSyntheticDefaultImports": true
   },
   "files": [
     "src/index.ts"
