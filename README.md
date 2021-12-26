@@ -1,3 +1,14 @@
+# Adapations
+
+* Using [electron-log](https://github.com/megahertz/electron-log)
+
+```
+on Linux: ~/.config/{app name}/logs/{process type}.log
+on macOS: ~/Library/Logs/{app name}/{process type}.log
+on Windows: %USERPROFILE%\AppData\Roaming\{app name}\logs\{process type}.log
+```
+
+
 # Vite Electron Builder Boilerplate
 
 [![GitHub issues by-label](https://img.shields.io/github/issues/cawa-93/vite-electron-builder/help%20wanted?label=issues%20need%20help&logo=github)](https://github.com/cawa-93/vite-electron-builder/issues?q=label%3A%22help+wanted%22+is%3Aopen+is%3Aissue)

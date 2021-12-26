@@ -11,14 +11,17 @@
     "precompile": "cross-env MODE=production npm run build",
     "compile": "electron-builder build --config .electron-builder.config.js --dir --config.asar=false",
     "pretest": "npm run build",
-    "test": "node tests/app.spec.js",
     "watch": "node scripts/watch.js",
     "lint": "eslint . --ext js,ts,vue",
     "typecheck-main": "tsc --noEmit -p packages/main/tsconfig.json",
     "typecheck-preload": "tsc --noEmit -p packages/preload/tsconfig.json",
     "typecheck-renderer": "vue-tsc --noEmit -p packages/renderer/tsconfig.json",
-    "typecheck": "npm run typecheck-main && npm run typecheck-preload",
-    "pretypecheck-renderer": "dts-cb -i packages/preload/src/**/*.ts -o packages/preload/exposedInMainWorld.d.ts"
+    "typecheck-core": "tsc --noEmit -p packages/core/tsconfig.json",
+    "typecheck": "npm run typecheck-core && npm run typecheck-main && npm run typecheck-preload && npm run typecheck-renderer",
+    "pretypecheck-core": "dts-cb -i packages/core/src/**/*.ts -o packages/core/types.d.ts",
+    "pretypecheck-renderer": "dts-cb -i packages/preload/src/**/*.ts -o packages/preload/exposedInMainWorld.d.ts",
+    "test": "vitest",
+    "coverage": "vitest --coverage"
   },
   "devDependencies": {
     "@types/electron-devtools-installer": "2.2.0",
@@ -26,22 +29,27 @@
     "@typescript-eslint/parser": "^5.7.0",
     "@vitejs/plugin-vue": "2.0.1",
     "cross-env": "7.0.3",
-    "dts-for-context-bridge": "0.7.0",
+    "dts-for-context-bridge": "^0.7.1",
     "electron": "16.0.5",
     "electron-builder": "22.14.5",
     "electron-devtools-installer": "3.2.0",
+    "electron-log": "^4.4.3",
+    "electron-util": "^0.17.2",
     "eslint": "8.5.0",
     "eslint-plugin-vue": "8.2.0",
+    "mitt": "^3.0.0",
     "nano-staged": "0.5.0",
     "playwright": "1.17.1",
     "simple-git-hooks": "2.7.0",
     "typescript": "4.5.4",
     "vite": "2.7.3",
+    "vitest": "^0.0.107",
     "vue-tsc": "0.29.8"
   },
   "dependencies": {
     "electron-updater": "4.6.5",
     "vue": "3.2.26",
-    "vue-router": "4.0.12"
+    "vue-router": "4.0.12",
+    "vuex": "^4.0.2"
   }
 }

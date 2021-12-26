@@ -4,7 +4,10 @@ import {join} from 'path';
 import {URL} from 'url';
 import './security-restrictions';
 // import context from './titlebarContextApi';
-// import titlebarContext from './titlebarContextApi'
+import tcmContext from '../../core/src/TcmContext';
+import log from 'electron-log';
+
+log.info('Main process');
 
 // const registerTitlebarIpc = () => {
 //   ipcMain.handle('open-url', (e, url) => {
@@ -18,6 +21,9 @@ import './security-restrictions';
 
 const isMac = process.platform === 'darwin';
 
+const callAboutWindow = () => {
+  tcmContext.openModal('about');
+};
 
 const template: MenuItemConstructorOptions[] = [
   ...(isMac
@@ -28,10 +34,11 @@ const template: MenuItemConstructorOptions[] = [
           { role: 'about', label: 'Über Tipico Multicast Server' },
           { label: `Version ${app.getVersion()}`, enabled: false },
           {
-            label: 'Nach Updates suchen',
+            label: 'Do smth',
             enabled: true,
-            click: () => function () {
-              return false;
+            click: () => {
+              callAboutWindow();
+              console.log('hi from click');
             },
           },
           { type: 'separator' },

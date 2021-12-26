@@ -1,8 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {contextBridge} from 'electron';
 
 import type {BinaryLike} from 'crypto';
 import {createHash} from 'crypto';
-// import titlebarContext from '../../main/src/titlebarContext';
+import tcmContext from '../../core/src/TcmContext';
+import log from 'electron-log';
+
 /**
  * The "Main World" is the JavaScript context that your main renderer code runs in.
  * By default, the page you load in your renderer executes code in this world.
@@ -39,6 +42,15 @@ contextBridge.exposeInMainWorld('nodeCrypto', {
   },
 });
 
-// contextBridge.exposeInMainWorld('electron_window', {
-//   titlebar: titlebarContext,
-// });
+/** 
+ * Share Context with renderer process
+ */
+contextBridge.exposeInMainWorld('electron_window', {
+  tcmContext: tcmContext,
+});
+
+/**
+ * Enable electron-logger in renderer
+ * https://github.com/megahertz/electron-log/blob/master/docs/node-integration.md
+ */
+(window as any).eleclog = log.functions;

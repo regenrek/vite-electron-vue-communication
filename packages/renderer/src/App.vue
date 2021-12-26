@@ -11,10 +11,20 @@
 <script lang="ts">
 import {defineComponent} from 'vue';
 import AppNavigation from '/@/components/AppNavigation.vue';
+import tcmCore from '../../core/src/index';
+
 export default defineComponent({
   name: 'App',
   components: {
     AppNavigation,
+  },
+  async created(): Promise<void> {
+    //(window as any).store = this.$store;
+
+    console.log('store', this.$store);
+
+    //tcmCore.connectToStore(this.$store);
+    tcmCore.prompt('test');
   },
 });
 </script>

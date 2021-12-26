@@ -9,8 +9,8 @@
     >vite-electron-builder documentation</a>.
   </p>
 
-  <div v-if="!openModal">
-    HI FROM MODAL {{ openModal }} 
+  <div v-if="openModal">
+    HI FROM MODAL >>{{ openModal }}>>
   </div>
 
   ssss
@@ -61,7 +61,7 @@
 
 <script lang="ts">
 import {computed, defineComponent, ref} from 'vue';
-import context from '../../../main/src/titlebarContextApi';
+import context from '../../../core/src/TcmContextApi';
 
 export default defineComponent({
   name: 'HelloWorld',
