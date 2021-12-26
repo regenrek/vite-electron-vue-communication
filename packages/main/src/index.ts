@@ -1,82 +1,14 @@
-import type { MenuItemConstructorOptions } from 'electron';
-import {app, BrowserWindow, Menu } from 'electron';
+import {app, BrowserWindow, nativeTheme } from 'electron';
 import {join} from 'path';
-import {URL} from 'url';
+import { URL } from 'url';
+import windowStateKeeper from 'electron-window-state';
 import './security-restrictions';
-// import context from './titlebarContextApi';
-import tcmContext from '../../core/src/TcmContext';
 import log from 'electron-log';
-
+import '/@/ipc/ColorSchemeHost';
+import '/@/ipc/DialogsHost';
+import '/@/ipc/WindowControls';
+import '/@/ipc/hardwareAccelerationService';
 log.info('Main process');
-
-// const registerTitlebarIpc = () => {
-//   ipcMain.handle('open-url', (e, url) => {
-//     shell.openExternal(url);
-//   });
-// };
-
-// const openUrl = () => {
-//   titlebarContext.openModal("https://www.google.at")
-// }
-
-const isMac = process.platform === 'darwin';
-
-const callAboutWindow = () => {
-  tcmContext.openModal('about');
-};
-
-const template: MenuItemConstructorOptions[] = [
-  ...(isMac
-    ? [
-      {
-        label: app.name,
-        submenu: [
-          { role: 'about', label: 'Über Tipico Multicast Server' },
-          { label: `Version ${app.getVersion()}`, enabled: false },
-          {
-            label: 'Do smth',
-            enabled: true,
-            click: () => {
-              callAboutWindow();
-              console.log('hi from click');
-            },
-          },
-          { type: 'separator' },
-          { role: 'quit', label: 'Tipico Multicast Client beenden' },
-        ],
-      } as MenuItemConstructorOptions,
-    ]
-    : []),
-  {
-    label: 'Ansicht',
-    submenu: [
-      { role: 'reload', label: 'Neu laden' },
-      { role: 'forceReload', label: 'Neu laden erzwingen' },
-      { type: 'separator' },
-      { role: 'togglefullscreen', label: 'Vollbild umschalten' },
-    ],
-  } as MenuItemConstructorOptions,
-  ...(!isMac
-    ? [
-      {
-        label: 'Hilfe',
-        submenu: [
-          { role: 'about', label: 'Über Tipico Multicast Server' },
-          { label: `Version ${app.getVersion()}`, enabled: false },
-          {
-            label: 'Nach Updates suchen',
-            enabled: true,
-            click: () => function () {
-              return false;
-            },
-          },
-        ],
-      } as MenuItemConstructorOptions,
-    ]
-    : []),
-];
-
-Menu.setApplicationMenu(Menu.buildFromTemplate(template));
 
 const isSingleInstance = app.requestSingleInstanceLock();
 const isDevelopment = import.meta.env.MODE === 'development';
@@ -103,16 +35,23 @@ if (isDevelopment) {
 let mainWindow: BrowserWindow | null = null;
 
 const createWindow = async () => {
+  const mainWindowState = windowStateKeeper({ fullScreen: false });
+
   mainWindow = new BrowserWindow({
     show: false, // Use 'ready-to-show' event to show window
+    width: mainWindowState.width,
+    height: mainWindowState.height,
+    x: mainWindowState.x,
+    y: mainWindowState.y,
+    minWidth: 430,
+    frame: false,
+    backgroundColor: nativeTheme.shouldUseDarkColors ? '#1b1d1f' : '#fff',
     webPreferences: {
       nativeWindowOpen: true,
       webviewTag: false, // The webview tag is not recommended. Consider alternatives like iframe or Electron's BrowserView. https://www.electronjs.org/docs/latest/api/webview-tag#warning
       preload: join(__dirname, '../../preload/dist/index.cjs'),
     },
   });
-
-  // registerTitlebarIpc(mainWindow);
 
   /**
    * If you install `show: true` then it can cause issues when trying to close the window.
@@ -121,10 +60,13 @@ const createWindow = async () => {
    * @see https://github.com/electron/electron/issues/25012
    */
   mainWindow.on('ready-to-show', () => {
-    mainWindow?.show();
+    if (mainWindow) {
+      mainWindowState.manage(mainWindow);
 
-    if (isDevelopment) {
-      mainWindow?.webContents.openDevTools();
+      mainWindow.show();
+      if (isDevelopment) {
+        mainWindow?.webContents.openDevTools();
+      }
     }
   });
 
@@ -140,8 +82,6 @@ const createWindow = async () => {
 
   await mainWindow.loadURL(pageUrl);
 };
-
-
 
 app.on('second-instance', () => {
   // Someone tried to run a second instance, we should focus our window.

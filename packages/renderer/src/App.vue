@@ -1,41 +1,18 @@
-<template>
-  <img
-    alt="Vue logo"
-    src="../assets/logo.svg"
-    width="300"
-  >
-  <app-navigation />
-  <router-view />
-</template>
+<script lang="ts" setup>
+import {isWindowMaximized} from '/@/use/isWindowMaximized';
+import TitleBar from '/@/components/TitleBar/TitleBar.vue';
+import {watchEffect} from 'vue';
+import {useInFocus} from '/@/use/useInFocus';
 
-<script lang="ts">
-import {defineComponent} from 'vue';
-import AppNavigation from '/@/components/AppNavigation.vue';
 
-export default defineComponent({
-  name: 'App',
-  components: {
-    AppNavigation,
-  },
-  // async created(): Promise<void> {
-  //   //(window as any).store = this.$store;
-
-  //   console.log('store', this.$store);
-
-  //   //tcmCore.connectToStore(this.$store);
-  //   // tcmCore.prompt('test');#
-  //   console.log('isel', isTrue);
-  // },
+const {isMaximized} = isWindowMaximized();
+const {inFocus} = useInFocus();
+watchEffect(() => {
+  document.body.style.border = `${isMaximized.value ? 0 : 1}px solid ${inFocus.value ? 'black' : 'rgba(0,0,0,0.5)'}`;
 });
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<template>
+  <title-bar />
+  <router-view />
+</template>

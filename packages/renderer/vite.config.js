@@ -4,6 +4,7 @@ import {chrome} from '../../.electron-vendors.cache.json';
 import {join} from 'path';
 import {builtinModules} from 'module';
 import vue from '@vitejs/plugin-vue';
+import WindiCSS from 'vite-plugin-windicss';
 
 const PACKAGE_ROOT = __dirname;
 
@@ -14,12 +15,15 @@ const PACKAGE_ROOT = __dirname;
 const config = {
   mode: process.env.MODE,
   root: PACKAGE_ROOT,
+  envDir: process.cwd(),
+  logLevel: 'warn',
   resolve: {
     alias: {
       '/@/': join(PACKAGE_ROOT, 'src') + '/',
+      '/@shared/': join(PACKAGE_ROOT, '../shared') + '/',
     },
   },
-  plugins: [vue()],
+  plugins: [vue(), WindiCSS()],
   base: '',
   server: {
     fs: {
@@ -32,9 +36,7 @@ const config = {
     outDir: 'dist',
     assetsDir: '.',
     rollupOptions: {
-      external: [
-        ...builtinModules,
-      ],
+      external: [...builtinModules],
     },
     emptyOutDir: true,
     brotliSize: false,

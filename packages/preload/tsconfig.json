@@ -6,6 +6,9 @@
     "paths": {
       "/@/*": [
         "./src/*"
+      ],
+      "/@shared/*": [
+        "../shared/*"
       ]
     }
   },
@@ -13,6 +16,7 @@
     "src/index.ts"
   ],
   "include": [
+    "./**/*.d.ts",
     "../../types/**/*.d.ts"
   ]
 }

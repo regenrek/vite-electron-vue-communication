@@ -16,10 +16,11 @@ const config = {
   resolve: {
     alias: {
       '/@/': join(PACKAGE_ROOT, 'src') + '/',
+      '/@shared/': join(PACKAGE_ROOT, '../shared') + '/',
     },
   },
   build: {
-    sourcemap: 'inline',
+    sourcemap: process.env.MODE === 'development' ? 'inline' : true,
     target: `node${node}`,
     outDir: 'dist',
     assetsDir: '.',
@@ -29,11 +30,7 @@ const config = {
       formats: ['cjs'],
     },
     rollupOptions: {
-      external: [
-        'electron',
-        'electron-devtools-installer',
-        ...builtinModules,
-      ],
+      external: ['electron', 'electron-devtools-installer', ...builtinModules],
       output: {
         entryFileNames: '[name].cjs',
       },

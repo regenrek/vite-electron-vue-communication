@@ -1,12 +1,10 @@
-import {createApp} from 'vue';
+import 'virtual:windi.css';
+import './styles/index.css';
+
+import { createApp } from 'vue';
 import App from '/@/App.vue';
 import router from '/@/router';
-import store from '/@/store';
-import environment from '../../core/src/index';
 
 createApp(App)
   .use(router)
-  .use(store)
-  .mount('#app');
-
-environment.connectToStore(store);
+  .mount('#app-root');

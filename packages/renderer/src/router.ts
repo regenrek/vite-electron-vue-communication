@@ -1,12 +1,15 @@
 import {createRouter, createWebHashHistory} from 'vue-router';
-import Home from '/@/components/Home.vue';
+import type { RouteRecordRaw } from 'vue-router';
 
-const routes = [
-  {path: '/', name: 'Home', component: Home},
-  {path: '/about', name: 'About', component: () => import('/@/components/About.vue')}, // Lazy load route component
+const routes: RouteRecordRaw[] = [
+  { path: '/', name: 'Home', component: () => import('/@/pages/Home/Home.vue') },
+  { path: '/about', name: 'About', component: () => import('/@/pages/About/About.vue') }, // Lazy load route component
+  { path: '/options/', name: 'Options', component: () => import('/@/pages/Options/Options.vue') },
 ];
 
-export default createRouter({
+const router = createRouter({
   routes,
-  history: createWebHashHistory(),
+  history: createWebHashHistory('/'),
 });
+
+export default router;

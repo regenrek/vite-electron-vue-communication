@@ -12,13 +12,15 @@ const config = {
   mode: process.env.MODE,
   root: PACKAGE_ROOT,
   envDir: process.cwd(),
+  logLevel: 'warn',
   resolve: {
     alias: {
       '/@/': join(PACKAGE_ROOT, 'src') + '/',
+      '/@shared/': join(PACKAGE_ROOT, '../shared') + '/',
     },
   },
   build: {
-    sourcemap: 'inline',
+    sourcemap: process.env.MODE === 'development' ? 'inline' : true,
     target: `chrome${chrome}`,
     outDir: 'dist',
     assetsDir: '.',
@@ -28,10 +30,7 @@ const config = {
       formats: ['cjs'],
     },
     rollupOptions: {
-      external: [
-        'electron',
-        ...builtinModules,
-      ],
+      external: ['electron', ...builtinModules],
       output: {
         entryFileNames: '[name].cjs',
       },

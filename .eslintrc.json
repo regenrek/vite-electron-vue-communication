@@ -5,6 +5,10 @@
     "node": true,
     "browser": false
   },
+  "globals": {
+    "defineProps": "readonly",
+    "defineEmits": "readonly"
+  },
   "extends": [
     "eslint:recommended",
     /** @see https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin#recommended-configs */
