@@ -11,7 +11,7 @@ function stringifyMessage(message) {
     return message;
 }
 
-function stringifyMessages(messages) {
+function stringifyMessages(messages: string[]) {
     return messages.map(stringifyMessage).join(' ');
 }
 
@@ -38,14 +38,15 @@ class Logger {
         this.logGatewayCall( 'error', stringifyMessages(messages));
     }
 
-    logGatewayCall(level, message) {
+    logGatewayCall(level: string, message: string) {
         if (this.enableFileLogger && this.isEnabled) {
             // eslint-disable-next-line no-console
             console.log('in logger plugin ', level, message);
             // loggerApi.send(level, message);
         }
         
-        if (this.isEnabled) console[level](message);
+        // eslint-disable-next-line no-console
+        if (this.isEnabled) window.console[level](message);
     }
 }
 
