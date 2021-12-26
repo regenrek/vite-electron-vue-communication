@@ -1,5 +1,4 @@
 import type { App } from 'vue';
-import { loggerApi } from '../../../../core/src/logger';
 
 export interface ILoggerOptions {
     enableFileLogger: boolean,
@@ -43,7 +42,7 @@ class Logger {
         if (this.enableFileLogger && this.isEnabled) {
             // eslint-disable-next-line no-console
             console.log('in logger plugin ', level, message);
-            loggerApi.send(level, message);
+            // loggerApi.send(level, message);
         }
         
         if (this.isEnabled) console[level](message);
