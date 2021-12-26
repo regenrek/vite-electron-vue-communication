@@ -6,7 +6,7 @@ export interface ILoggerOptions {
     isEnabled: boolean
 }
 
-function stringifyMessage(message) {
+function stringifyMessage(message: string) {
     if (typeof message === 'object') return JSON.stringify(message);
     return message;
 }
@@ -46,7 +46,7 @@ class Logger {
         }
         
         // eslint-disable-next-line no-console
-        if (this.isEnabled) window.console[level](message);
+        if (this.isEnabled) window.console[level](message) as any;
     }
 }
 
