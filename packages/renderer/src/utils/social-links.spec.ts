@@ -1,7 +1,9 @@
+import { it, test, expect } from 'vitest';
 import * as links from './social-links';
 
-describe('Ссылки на соц. сети не должны заканчиваться на /', () => {
-  for (const [,link] of Object.entries(links)) {
+
+it('Social links basic test /', () => {
+  for (const [, link] of Object.entries(links)) {
     test(link, () => expect(link.endsWith('/')).toBeFalsy());
   }
 });

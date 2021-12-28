@@ -1,0 +1,10 @@
+{
+    "vetur.validation.interpolation": false,
+    "vetur.validation.script": false,
+    "favorites.resources": [
+        {
+            "filePath": "node_modules/konva",
+            "group": "Default"
+        }
+    ]
+}

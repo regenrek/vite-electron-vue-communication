@@ -5,6 +5,7 @@ import {join} from 'path';
 import {builtinModules} from 'module';
 import vue from '@vitejs/plugin-vue';
 import WindiCSS from 'vite-plugin-windicss';
+import { resolve } from 'path';
 
 const PACKAGE_ROOT = __dirname;
 
@@ -12,7 +13,7 @@ const PACKAGE_ROOT = __dirname;
  * @type {import('vite').UserConfig}
  * @see https://vitejs.dev/config/
  */
-const config = {
+export default {
   mode: process.env.MODE,
   root: PACKAGE_ROOT,
   envDir: process.cwd(),
@@ -41,6 +42,17 @@ const config = {
     emptyOutDir: true,
     brotliSize: false,
   },
+  test: {
+    global: true,
+    environment: 'jsdom',
+    setupFiles: [resolve(__dirname, './.test/setup.ts')],
+    reporters: 'dot',
+    deps: {
+      inline: [
+        'vue2',
+        '@vue/composition-api',
+        'vue-demi',
+      ],
+    },
+  },
 };
-
-export default config;

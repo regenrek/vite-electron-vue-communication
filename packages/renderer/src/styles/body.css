@@ -4,7 +4,7 @@
   }
 
   body {
-    @apply grid grid-rows-[min-content,auto] bg-true-gray-600 dark:bg-true-gray-900 h-full overflow-hidden;
+    @apply grid grid-rows-[min-content,auto] bg-white dark:bg-true-gray-900 h-full overflow-hidden;
   }
 
   /**
