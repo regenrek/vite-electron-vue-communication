@@ -16,7 +16,7 @@
     "typecheck:main": "tsc --noEmit -p packages/main/tsconfig.json",
     "typecheck:preload": "tsc --noEmit -p packages/preload/tsconfig.json",
     "typecheck:renderer": "vue-tsc --noEmit -p packages/renderer/tsconfig.json",
-    "typecheck": "concurrently --rwa \"npm:typecheck:*\"",
+    "typecheck": "",
     "pretypecheck-renderer": "dts-cb -i packages/preload/src/**/*.ts -o packages/preload/exposedInMainWorld.d.ts",
     "test": "vitest --open false -c packages/renderer/vite.config.js",
     "coverage": "vitest --coverage"
