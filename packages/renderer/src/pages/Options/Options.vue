@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import {useTitle} from '@vueuse/core';
-import ShikiOauth from '/@/pages/Options/OptionsShikiOauth.vue';
 import OptionAnime365 from '/@/pages/Options/OptionsAnime365/OptionsAnime365.vue';
 import TimelineThumbnails from '/@/pages/Options/OptionsTimelineThumbnails.vue';
 import ColorScheme from '/@/pages/Options/OptionsColorScheme.vue';
@@ -9,6 +8,7 @@ import OptionsAnimeTitleLang from '/@/pages/Options/OptionsAnimeTitleLang/Option
 import TranslationsPrioritization from '/@/pages/Options/TranslationsPrioritization/TranslationsPrioritization.vue';
 import OptionsSkipCompletedEpisode from '/@/pages/Options/OptionsSkipCompletedEpisode/OptionsSkipCompletedEpisode.vue';
 import OptionsEnableHardwareAcceleration from '/@/pages/Options/OptionsEnableHardwareAcceleration.vue';
+import OptionsTextInput from './OptionsTextInput.vue';
 
 
 useTitle('Параметры');
@@ -46,7 +46,7 @@ useTitle('Параметры');
         aria-labelledby="connections-head"
       >
         <h2 id="connections-head">
-          Подключение аккаунтов
+          Allgemein
         </h2>
 
         <section
@@ -71,10 +71,10 @@ useTitle('Параметры');
             id="connections-shikimori-head"
             class="card-header text-base"
           >
-            Шикимори
+            Konfiguration
           </h3>
 
-          <shiki-oauth />
+          <options-text-input />
         </section>
       </section>
 
@@ -84,7 +84,7 @@ useTitle('Параметры');
         aria-labelledby="app-settings-head"
       >
         <h2 id="app-settings-head">
-          Настройки приложения
+          Test
         </h2>
 
         <section

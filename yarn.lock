@@ -1918,6 +1918,11 @@
   resolved "https://registry.npmjs.org/@vue/shared/-/shared-3.2.26.tgz#7acd1621783571b9a82eca1f041b4a0a983481d9"
   integrity sha512-vPV6Cq+NIWbH5pZu+V+2QHE9y1qfuTq49uNWw4f7FDEeZaDU2H2cx5jcUZOAKW7qTrUS4k6qZPbMy1x4N96nbA==
 
+"@vueform/multiselect@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.npmjs.org/@vueform/multiselect/-/multiselect-2.3.1.tgz#4fbaf81ece0fcf7f1eb08b718c8d81028d3438ab"
+  integrity sha512-JyOfVOanRZHDWzdgrbO05KvSu4WOH4aPPa2sajMxu4C4QjZp2NeezW6Bdt588IuFfVn34n0s0w8w/bxtuH4KRQ==
+
 "@vueuse/core@7.4.0":
   version "7.4.0"
   resolved "https://registry.npmjs.org/@vueuse/core/-/core-7.4.0.tgz#dca848b9b2209d94142f2ec0baad4ee00455262c"

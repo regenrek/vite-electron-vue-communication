@@ -30,6 +30,7 @@
     "@typescript-eslint/parser": "^5.7.0",
     "@vitejs/plugin-vue": "2.0.1",
     "@vue/cli-plugin-eslint": "^4.5.15",
+    "@vueform/multiselect": "^2.3.1",
     "autoprefixer": "10.4.0",
     "concurrently": "6.5.1",
     "cross-env": "7.0.3",
