@@ -9,6 +9,10 @@
         {
             "filePath": "node_modules/jest-canvas-mock",
             "group": "Default"
+        },
+        {
+            "filePath": "node_modules/canvas",
+            "group": "Default"
         }
     ]
 }
