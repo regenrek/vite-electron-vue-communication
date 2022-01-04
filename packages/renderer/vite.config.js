@@ -45,7 +45,7 @@ export default {
   test: {
     global: true,
     environment: 'jsdom',
-    setupFiles: [resolve(__dirname, './.test/setup.ts') ],
+    setupFiles: [resolve(__dirname, './.test/setup.ts')],
     reporters: 'dot',
     deps: {
       inline: ['vue2', '@vue/composition-api', 'vue-demi'],
