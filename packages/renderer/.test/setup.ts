@@ -6,6 +6,7 @@ import { vitest, beforeEach, vi } from 'vitest'
 // import 'jest-canvas-mock'
 
 //import * as canvas from 'canvas'
+// import * as canvas from 'canvas';
 
 
 const createLocalStorage = () => {
