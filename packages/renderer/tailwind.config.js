@@ -1,5 +1,7 @@
 import {defineConfig} from 'windicss/helpers';
 import colors from 'windicss/colors';
+// eslint-disable-next-line no-undef
+const pluginIcons = require('@windicss/plugin-icons');
 
 export default defineConfig({
   /**
@@ -24,8 +26,9 @@ export default defineConfig({
     },
   },
   shortcuts: {
-    'square': {
+    square: {
       'aspect-ratio': '1',
     },
   },
+  plugins: [pluginIcons],
 });

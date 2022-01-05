@@ -2,8 +2,9 @@ import { Stage } from 'konva/lib/Stage';
 import type { StageConfig } from 'konva/lib/Stage';
 
 export function useStage() {
+    // const canvasWidth: number = window.innerWidth - 215;
     const canvasWidth: number = window.innerWidth;
-    const canvasHeight: number = window.innerHeight;
+    const canvasHeight: number = window.innerHeight - 23;
 
     const stageDefaultConfig: StageConfig = {
         draggable: true,
@@ -12,7 +13,7 @@ export function useStage() {
         height: canvasHeight,
     };
 
-    const initStage = (config: StageConfig) => {
+    const initStage = (config?: StageConfig) => {
         return new Stage(config || stageDefaultConfig);
     };
 

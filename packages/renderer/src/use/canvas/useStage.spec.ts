@@ -10,6 +10,9 @@ beforeEach(() => {
     canvas.width = 400;
     canvas.height = 300;
     ctx.setTransform(1, 2, 3, 4, 5, 6);
+
+    // const content = window.document.documentElement.outerHTML;
+    // console.log(content);
 });
 
 describe('scale', () => {
@@ -45,9 +48,12 @@ describe('scale', () => {
 
         const stage = initStage(stageDefaultConfig);
 
-        console.log(stage);
+        // console.log(stage);
         
         expect(stage.width()).toBe(window.innerWidth);
         expect(stage.height()).toBe(window.innerHeight);
+
+        const content = window.document.documentElement.outerHTML;
+        console.log(content);
     });
 });
