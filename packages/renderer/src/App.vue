@@ -4,7 +4,6 @@ import TitleBar from '/@/components/TitleBar/TitleBar.vue';
 import {watchEffect} from 'vue';
 import {useInFocus} from '/@/use/useInFocus';
 
-
 const {isMaximized} = isWindowMaximized();
 const {inFocus} = useInFocus();
 watchEffect(() => {

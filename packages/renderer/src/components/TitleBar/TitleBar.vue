@@ -16,7 +16,7 @@ const {inFocus} = useInFocus();
 
 <template>
   <header
-    class="flex region-drag max-w-screen h-8"
+    class="flex region-drag max-w-screen h-8 border-b border-true-gray-700"
     :class="{
       'opacity-50': !inFocus
     }"

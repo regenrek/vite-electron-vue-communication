@@ -1,21 +1,53 @@
 import { Stage } from 'konva/lib/Stage';
-import type { StageConfig } from 'konva/lib/Stage';
+import type { StageConfig, Stage as TStage } from 'konva/lib/Stage';
+import { useWindowSize } from '@vueuse/core';
+import { watch, onMounted } from 'vue';
+import { useCanvasLayer } from '/@/use/canvas/useCanvasLayer';
+
+const { canvasLayer } = useCanvasLayer();
 
 export function useStage() {
     // const canvasWidth: number = window.innerWidth - 215;
     const canvasWidth: number = window.innerWidth;
     const canvasHeight: number = window.innerHeight;
+    const { height, width } = useWindowSize();
+    let stage: TStage;
 
     const stageDefaultConfig: StageConfig = {
+
         draggable: true,
         container: 'konva-container',
         width: canvasWidth,
         height: canvasHeight,
     };
 
+    onMounted(() => {
+        stage = initStage();
+        stage.add(canvasLayer);
+    });
+
+    watch(height, () => {
+        stage.height(height.value);
+    });
+
+    watch(width, () => {
+        stage.width(width.value);
+        stage.clear();
+        stage.draw();
+    });
+
     const initStage = (config?: StageConfig) => {
-        return new Stage(config || stageDefaultConfig);
+        stage = new Stage(config || stageDefaultConfig);
+        return stage;
     };
+
+    // const resizeStage = (stage: Stage) => {
+    //     const { height, width } = useWindowSize();
+    //     stage.width(width.value);
+    //     stage.height(height.value);
+
+    //     console.log('resize to: ', height.value, width.value);
+    // };
 
     // const computeDimensions = (heightToWidthRatio: number) => {
     //     const windowHeight =

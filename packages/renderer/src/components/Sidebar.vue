@@ -11,7 +11,7 @@ const props = defineProps({
 
 <template>
   <aside
-    class="min-h-screen bg-true-gray-900 border-l border-true-gray-700 flex-shrink-0"
+    class="absolute right-0 top-[34px] min-h-screen bg-true-gray-900 border-l border-true-gray-700 flex-shrink-0"
     :class="[props.mode === 'closed' ? 'w-[40px]' : 'w-[215px]']"
   >
     Mode: {{ props.mode }}

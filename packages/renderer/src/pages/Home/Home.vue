@@ -1,20 +1,9 @@
 <script lang="ts" setup>
-import {useCanvasLayer} from '/@/use/canvas/useCanvasLayer';
 import {useStage} from '/@/use/canvas/useStage';
-import { onMounted } from 'vue';
 import ToggleSidebar from '/@/components/ToggleSidebar.vue';
 import Topbar from '/@/components/Topbar.vue';
 
-const { canvasLayer } = useCanvasLayer();
-const { initStage } = useStage();
-
-//const { sidebar } = useSidebar();
-let stage;
-
-onMounted(() => {
-  stage = initStage();
-  stage.add(canvasLayer);
-});
+useStage();
 </script>
 <template>
   <main class="min-h-screen flex">
