@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import {useTitle} from '@vueuse/core';
-import OptionAnime365 from '/@/pages/Options/OptionsAnime365/OptionsAnime365.vue';
 import TimelineThumbnails from '/@/pages/Options/OptionsTimelineThumbnails.vue';
 import ColorScheme from '/@/pages/Options/OptionsColorScheme.vue';
 import HomeFooter from '/@/components/HomeFooter.vue';
@@ -49,19 +48,6 @@ useTitle('Параметры');
           Allgemein
         </h2>
 
-        <section
-          class="card border-accent !shadow-accent"
-          aria-labelledby="connections-anime365-head"
-        >
-          <h3
-            id="connections-anime365-head"
-            class="card-header text-base bg-accent font-bold dark:bg-accent-600"
-          >
-            Anime.365
-          </h3>
-
-          <option-anime365 />
-        </section>
 
         <section
           class="card"

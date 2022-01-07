@@ -3,10 +3,10 @@
     draggable="false"
     class="btn-title-bar win-icon"
     :to="{name: 'Options'}"
-    title="Параметры"
-    aria-label="Параметры"
+    title="Über"
+    aria-label="Über"
   >
-    &#xE713;
+    <i class="icon-info" />
   </router-link>
 </template>
 
